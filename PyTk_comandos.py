@@ -10,7 +10,7 @@ frame1 = tk.Frame(ventana)
 #Creamos un cuadro 'frame2' con (DONDE)
 frame2 = tk.Frame(frame1)
 
-#Creamos un objerto 'boton1' con (CONDE, text="TEXTO")
+#Creamos un objerto 'boton1' con (DONDE, text="TEXTO")
 boton1 = tk.Button(frame1, text="hoala mundo")
 
 #Creamos un objerto 'lebelframe' con (DONDE, text="TEXTO", bg="COLOR", padx=10, pady=10)
@@ -56,6 +56,8 @@ frame2.configure(width=200, height=200, bg="orange2", bd=0)
 
 #Asignamos las propiedades a 'labelframe1'(ANCHO, ALTO)
 labelframe1.config(width=200,height=200)
+
+#------------------ORDEN_SALIDA----------------------------------------------------------------------------------------------
 
 #'labelframe1' aparevera en 'ventana'
 labelframe1.pack()
