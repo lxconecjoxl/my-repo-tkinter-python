@@ -1,76 +1,113 @@
-#Importar la libreria 'tkinter' y renombrarla como 'tk'
+#Importar la librería 'tkinter' y renombrarla como 'tk'
 import tkinter as tk
 
 #Crea un nuevo objeto ventana
 ventana = tk.Tk()
 
-#Creamos un cuadro 'frame1' con (DONDE)
+#Creamos un cuadro 'frame1' en (DONDE)
 frame1 = tk.Frame(ventana)
 
-#Creamos un cuadro 'frame2' con (DONDE)
+#Creamos un cuadro 'frame2' en (DONDE)
 frame2 = tk.Frame(frame1)
 
-#Creamos un objerto 'boton1' con (DONDE, text="TEXTO")
-boton1 = tk.Button(frame1, text="hoala mundo")
+#Creamos un objeto 'entrada1' en (DONDE)
+entrada1 = tk.Entry(ventana)
 
-#Creamos un objerto 'lebelframe' con (DONDE, text="TEXTO", bg="COLOR", padx=10, pady=10)
+#Creamos un objeto 'boton1' en (DONDE, text="TEXTO")
+boton1 = tk.Button(ventana, text="Presionar")
+
+#Creamos un objeto 'etiqueta1' en (DONDE, text="TEXTO")
+etiqueta1 = tk.Label(ventana, text="etiqueta")
+
+#Creamos un objeto 'labelframe1' en (DONDE, text="TEXTO", bg="COLOR", padx=10, pady=10)
 labelframe1 = tk.LabelFrame(ventana, text="label", bg="orange3", padx=10, pady=10)
 
-#------------------CONFIG_VENTANA----------------------------------------------------------------------------------------------
+#------------------FUNCIONES------------------------------------------------------------------------------------------------
 
-#Le da el nombre al encabezado de la ventana (colocar antes de jnerar el loop)
-ventana.title("ventana")
+def presionar_boton1():
+    #le asignamos a la variable 'text' lo que esté en el campo de entrada
+    text = entrada1.get()
+    print(text)
 
-#Asignamos un tamaño a 'ventana' estesificando ("ANCHOxALTO+CoordenadaHorizontal+CoordenadaVertical")
-ventana.geometry("400x400+550+225")
-
-#Asignamos un tamaño MINIMO a 'ventana' estesificando (ANCHO, ALTO)
-ventana.minsize(400,400)
-
-#Asignamos un tamaño MAXIMO a 'ventana' estesificando (ANCHO, ALTO)
-ventana.maxsize(400,400)
-
-#Avilitar o desavilitar la modificacion manual del tamaño del objeto 'ventana' (ALTO, ANCHO) True/Folse
-ventana.resizable(True,True)
-
-#Agregar un logo al objeto 'ventana'(el cual deve ser ina imagen y estar en la carpeta del proyecto y formato .ico)
-ventana.iconbitmap("icono.ico")
-
-#Cambiar color de fondo del objeto'ventana'
-ventana.configure(bg="khaki")
-
-#Cambiar nivel de opasidad del objeto 'ventana'
-ventana.attributes("-alpha",1.0)
-
-#------------------CONFIG_FRAME----------------------------------------------------------------------------------------------
+#------------------CONFIG_FRAME---------------------------------------------------------------------------------------------
 
 #Asignamos las propiedades a 'frame1'(ANCHO, ALTO, COLOR, BORDE)
 frame1.configure(width=300, height=300, bg="orange4", bd=1)
 
 #Asignamos las propiedades a 'frame2'(ANCHO, ALTO, COLOR, BORDE)
-frame2.configure(width=200, height=200, bg="orange2", bd=0)
+frame2.configure(width=10, height=10, bg="orange2", bd=0)
 
-#------------------CONFIG_BUTTON----------------------------------------------------------------------------------------------
+#------------------CONFIG_BUTTON---------------------------------------------------------------------------------------------
 
-#------------------CONFIG_LABEL----------------------------------------------------------------------------------------------
+#Asignamos las propiedades a 'boton1'(fg=COLOR_LETRA,bg=COLOR_FONDO,font=("FUENTE",TAMAÑO,"ESTILO"),command=FUNCION_ASIGNADA_AL_BOTON)
+boton1.config(fg="snow", bg="gray1", font=("Arial", 54, "italic"), command=presionar_boton1)
+
+#------------------CONFIG_LABEL---------------------------------------------------------------------------------------------
+
+#Asignamos las propiedades a 'etiqueta1'(text=TEXTO,fg=COLOR_LETRA,bg=COLOR_FONDO,font=("FUENTE",TAMAÑO,"ESTILO"))
+etiqueta1.config(text="n", fg="snow", bg="gray1", font=("Arial", 54, "italic"))
+
+#------------------CONFIG_LABEL_FRAME---------------------------------------------------------------------------------------
 
 #Asignamos las propiedades a 'labelframe1'(ANCHO, ALTO)
-labelframe1.config(width=200,height=200)
+labelframe1.config(width=10, height=10)
 
-#------------------ORDEN_SALIDA----------------------------------------------------------------------------------------------
+#------------------CONFIG_ENTRY---------------------------------------------------------------------------------------------
 
-#'labelframe1' aparevera en 'ventana'
-labelframe1.pack()
+#Asignamos las propiedades a 'entrada1'(fg=COLOR_LETRA,bg=COLOR_FONDO,font=("FUENTE",TAMAÑO,"ESTILO"))
+entrada1.config(fg="snow", bg="gray1", font=("Arial", 54, "italic"))
 
-#'boton1' aparevera en 'frame1'
+#Dejamos un texto por defecto en la entrada
+entrada1.insert(0, "Nombre")
+
+#------------------CONFIG_VENTANA-------------------------------------------------------------------------------------------
+
+#Le da el nombre al encabezado de la ventana (colocar antes de generar el loop)
+ventana.title("ventana")
+
+#Asignamos un tamaño a 'ventana' especificando ("ANCHOxALTO+CoordenadaHorizontal+CoordenadaVertical")
+ventana.geometry("380x150+550+225")
+
+#Asignamos un tamaño MÍNIMO a 'ventana' especificando (ANCHO, ALTO)
+ventana.minsize(380, 150)
+
+#Asignamos un tamaño MÁXIMO a 'ventana' especificando (ANCHO, ALTO)
+ventana.maxsize(380, 150)
+
+#Habilitar o deshabilitar la modificación manual del tamaño del objeto 'ventana' (ALTO, ANCHO) True/False
+ventana.resizable(True, True)
+
+#Agregar un logo al objeto 'ventana'(el cual debe ser una imagen y estar en la carpeta del proyecto con formato .ico)
+ventana.iconbitmap("icono.ico")
+
+#Cambiar color de fondo del objeto 'ventana'
+ventana.configure(bg="khaki")
+
+#Cambiar nivel de opacidad del objeto 'ventana'
+ventana.attributes("-alpha", 1.0)
+
+#Refresca la página cada (MILISEGUNDOS, FUNCIÓN)
+ventana.after(0)
+
+#------------------ORDEN_SALIDA---------------------------------------------------------------------------------------------
+
+#'entrada1' aparecerá en 'ventana'
+entrada1.pack()
+
+#'boton1' aparecerá en 'ventana'
 boton1.pack()
 
-#'frame1' aparevera en 'ventana'
+#'frame1' aparecerá en 'ventana'
 frame1.pack()
 
-#'frame2' aparevera en 'frame1'
+#'frame2' aparecerá en 'frame1'
 frame2.pack()
+
+#'etiqueta1' aparecerá en 'ventana'
+etiqueta1.pack()
+
+#'labelframe1' aparecerá en 'ventana'
+labelframe1.pack()
 
 #Al objeto 'ventana' se le asigna un loop para que se mantenga abierto
 ventana.mainloop()
-
