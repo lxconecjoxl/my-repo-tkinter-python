@@ -29,6 +29,28 @@ def presionar_boton1():
     text = entrada1.get()
     print(text)
 
+#Si ocurre el evento disparador de la funcion (precionar el boton con la tecla '<Button-1>') se imprime 'boton precionado'
+def one_click(evento):
+    print("boton precionado")
+
+#Retorna cualquier tecla precionada
+def on_key_press(event):
+    chatr_event = str(event.char)
+    print(f"Tecla  {chatr_event} presionada")
+
+#Retorna el (ANCHO X ALTO) de la ventana
+def tamaño_ventana(event):
+    print(f"TAMAÑO_VENTANA: {event.width} X {event.height}")
+
+#Retorna las coordenadas del mouse dentro de la ventana (SIN CONTAR LOS VORDES)
+def coordenadas_mouse(event):
+    print(f"COORDENADAS_MOUSE: X:{event.x} - Y: {event.y}")
+
+def one_click_A(event):
+    print(f"{event.widget['text']} presionado")
+
+    
+
 #------------------CONFIG_FRAME---------------------------------------------------------------------------------------------
 
 #Asignamos las propiedades a 'frame1'(ANCHO, ALTO, COLOR, BORDE)
@@ -41,6 +63,9 @@ frame2.configure(width=10, height=10, bg="orange2", bd=0)
 
 #Asignamos las propiedades a 'boton1'(fg=COLOR_LETRA,bg=COLOR_FONDO,font=("FUENTE",TAMAÑO,"ESTILO"),command=FUNCION_ASIGNADA_AL_BOTON)
 boton1.config(fg="snow", bg="gray1", font=("Arial", 54, "italic"), command=presionar_boton1)
+
+#Si se preciona el boton con la tecla '<Button-1>' se ejecutara la funcion 'one_click'
+boton1.bind("<Button-1>",one_click_A)
 
 #------------------CONFIG_LABEL---------------------------------------------------------------------------------------------
 
@@ -88,6 +113,15 @@ ventana.attributes("-alpha", 1.0)
 
 #Refresca la página cada (MILISEGUNDOS, FUNCIÓN)
 ventana.after(0)
+
+#Si se preciona el boton con la tecla '<KeyPress>'(CUALQUIER TECLA) se ejecutara la funcion 'on_key_press'
+ventana.bind("<KeyPress>",on_key_press)
+
+#Cuando dse mueve o modifica el tamaño de la ventana se llama a la funcion 'tamaño_ventana'
+ventana.bind("<Configure>",tamaño_ventana)
+
+#Detecla los movimientos del mouse dentro de la ventana (NO CUENTA LOS VORDES)
+ventana.bind("<Motion>",coordenadas_mouse)
 
 #------------------ORDEN_SALIDA---------------------------------------------------------------------------------------------
 
