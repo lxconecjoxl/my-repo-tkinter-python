@@ -27,6 +27,7 @@ boton1 = tk.Button(ventana, text="Presionar",)
 
 #Creamos un objeto 'etiqueta "n"' en (DONDE, text="TEXTO")
 etiqueta1 = tk.Label(ventana, text="etiqueta")
+etiqueta2 = tk.Label(ventana, text="etiqueta")
 
 #Vatriable de control para radio_button
 variable_control = tk.IntVar()
@@ -75,8 +76,8 @@ frame2.configure(width=10, height=10, bg="orange2", bd=0)
 
 #------------------CONFIG_BUTTON---------------------------------------------------------------------------------------------
 
-#Asignamos las propiedades a 'boton "n"'(fg=COLOR_LETRA,bg=COLOR_FONDO,font=("FUENTE",TAMAÑO,"ESTILO"),command=FUNCION_ASIGNADA_AL_BOTON)
-boton1.config(fg="snow", bg="gray1", font=("Arial", 54, "italic"), command=selecciono)
+#Asignamos las propiedades a 'boton "n"'(fg=COLOR_LETRA,bg=COLOR_FONDO,font=("FUENTE",TAMAÑO,"ESTILO"),esstado=AVILIRADO/DESAVILITADO, command=FUNCION_ASIGNADA_AL_BOTON)
+boton1.config(fg="snow", bg="gray1", font=("Arial", 54, "italic"),state="disabled",command=selecciono)
 
 #Si se preciona el boton con la tecla '<Button-1>' se ejecutara la funcion 'one_click'
 #boton1.bind("<Button-1>",lambda event: selecciono)
@@ -106,11 +107,12 @@ check2.config(text="Pera",fg="gray1", bg="khaki", font=("Arial", 54, "italic"),
 #------------------CONFIG_LABEL---------------------------------------------------------------------------------------------
 
 #Asignamos las propiedades a 'etiqueta "n"'(text=TEXTO,fg=COLOR_LETRA,bg=COLOR_FONDO,font=("FUENTE",TAMAÑO,"ESTILO"))
-etiqueta1.config(text=" ", fg="snow", bg="gray1", font=("Arial", 54, "italic"))
+etiqueta1.config(text="pollo1", fg="snow", bg="gray1", font=("Arial", 54, "italic"))
+etiqueta2.config(text="pollo2", fg="snow", bg="gray1", font=("Arial", 54, "italic"))
 
 #------------------CONFIG_LABEL_FRAME---------------------------------------------------------------------------------------
 
-#Asignamos las propiedades a 'labelframe "n"'(text="TEXTO", bg="COLOR", padx=10, pady=10, width=ANCHO, height=ALTO)
+#Asignamos las propiedades a 'labelframe "n"'(text="TEXTO", bg="COLOR", padx=SEPARACION_EN_X, pady=SEPARACION_EN_Y, width=ANCHO, height=ALTO)
 labelframe1.config(text="label", bg="orange3", padx=10, pady=10, width=10, height=10)
 
 #------------------CONFIG_ENTRY---------------------------------------------------------------------------------------------
@@ -155,42 +157,60 @@ ventana.bind("<KeyPress>",on_key_press)
 
 #Cuando dse mueve o modifica el tamaño de la ventana se llama a la funcion 'tamaño_ventana'
 #ventana.bind("<Configure>",tamaño_ventana)
-ventana.bind("<Button-2>",tamaño_ventana)
+ventana.bind("<Button-4>",tamaño_ventana)
 
 #Detecla los movimientos del mouse dentro de la ventana (NO CUENTA LOS VORDES)
-#ventana.bind("<Motion>",coordenadas_mouse)
+ventana.bind("<Button-5>",coordenadas_mouse)
 
-#------------------ORDEN_SALIDA---------------------------------------------------------------------------------------------
+#------------------ORDEN_SALIDA_PACK---------------------------------------------------------------------------------------------
 
-#'entrada1' aparecerá en 'ventana'
+#PACK 'entrada1' aparecerá en 'ventana'
 #entrada1.pack()
 
-#'boton1' aparecerá en 'ventana'
-#boton1.pack()
+#PACK 'check1' aparecerá en 'ventana'
+#check1.pack()
 
-#'check1' aparecerá en 'ventana'
-check1.pack()
+#PACK 'check2' aparecerá en 'ventana'
+#check2.pack()
 
-#'check2' aparecerá en 'ventana'
-check2.pack()
-
-#'check1' aparecerá en 'ventana'
+#PACK 'check1' aparecerá en 'ventana'
 #radio1.pack()
 
-#'check2' aparecerá en 'ventana'
+#PACK 'check2' aparecerá en 'ventana'
 #radio2.pack()
 
-#'frame1' aparecerá en 'ventana'
+#PACK 'frame1' aparecerá en 'ventana'
 #frame1.pack()
 
-#'frame2' aparecerá en 'frame1'
+#PACK 'frame2' aparecerá en 'frame1'
 #frame2.pack()
 
-#'etiqueta1' aparecerá en 'ventana'
-#etiqueta1.pack()
+#PACK 'etiqueta1' aparecerá en 'ventana'
+#etiqueta1.pack(side="right",padx=15)
 
-#'labelframe1' aparecerá en 'ventana'
+#PACK 'boton1' aparecerá en 'ventana'
+#boton1.pack(side="right",padx=15)
+
+#PACK 'labelframe1' aparecerá en 'ventana'
 #labelframe1.pack()
+
+#------------------ORDEN_SALIDA_GRIDE---------------------------------------------------------------------------------------------
+
+#GRIDE 'etiquet "n"' aparecerá en 'ventana' en (row=FILA,column=COLUMNA, padx=SEPARACION_EN_X, pady=SEPARACION_EN_Y)
+#etiqueta2.grid(row=1,column=0,padx=0, pady=0)
+#etiqueta1.grid(row=0,column=1,padx=0, pady=0)
+
+#------------------ORDEN_SALIDA_PLACE---------------------------------------------------------------------------------------------
+#PLACE 'etiquet "n"' aparecerá en 'ventana' en (x=COORDENADA_X, y=COORDENADA_y)
+#etiqueta1.place(x=0,y=0)
+#etiqueta2.place(x=200,y=0)
+
+#PLACE 'etiquet "n"' aparecerá en 'ventana' en (relx=COORDENADA_RELATIVA_X, rely=COORDENADA_RELATIVA_Y)(RELATIVA AL CONTENEDOR 'ventana')
+#etiqueta1.place(relx=0.0, rely=0.0)
+#etiqueta2.place(relx=0.50, rely=0.50)
+
 
 #Al objeto 'ventana' se le asigna un loop para que se mantenga abierto
 ventana.mainloop()
+
+#   (solo puedes usar un formato a la vez pack o grid o place)
