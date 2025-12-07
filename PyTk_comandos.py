@@ -4,20 +4,15 @@ import tkinter as tk
 #Crea un nuevo objeto ventana
 ventana = tk.Tk()
 
+#Creamos un objeto 'entrada "n"' en (DONDE,textvariable=VARIABLE_DE_TEXO)
+deslizante=tk.Scale(ventana)
+
 #Creamos un cuadro 'frame"n"' en (DONDE)
 frame1 = tk.Frame(ventana)
 frame2 = tk.Frame(frame1)
 
-#Creamos un objeto 'entrada "n"' en (DONDE)
+#Creamos un objeto 'entrada "n"' en (DONDE,textvariable=VARIABLE_DE_TEXO)
 entrada1 = tk.Entry(ventana)
-
-#Creamos un objeto 'radio "n"' en (DONDE)
-radio1=tk.Radiobutton(ventana)
-radio2=tk.Radiobutton(ventana)
-
-#Creamos un objeto 'check "n"' en (DONDE)
-check1=tk.Checkbutton(ventana)
-check2=tk.Checkbutton(ventana)
 
 #Creamos un objeto 'labelframe "n"' en (DONDE)
 labelframe1 = tk.LabelFrame(ventana)
@@ -29,12 +24,26 @@ boton1 = tk.Button(ventana, text="Presionar",)
 etiqueta1 = tk.Label(ventana, text="etiqueta")
 etiqueta2 = tk.Label(ventana, text="etiqueta")
 
+#Creamos un objeto 'radio "n"' en (DONDE)
+radio1=tk.Radiobutton(ventana)
+radio2=tk.Radiobutton(ventana)
+
+#Creamos un objeto 'check "n"' en (DONDE)
+check1=tk.Checkbutton(ventana)
+check2=tk.Checkbutton(ventana)
+
 #Vatriable de control para radio_button
 variable_control = tk.IntVar()
 
 #Vatriable de control para check_button
 variable_contro_check1=tk.BooleanVar()
 variable_contro_check2=tk.BooleanVar()
+
+#Vatriable de control para entry
+texto=tk.StringVar()
+
+#Vatriable de control para Scale
+valor_deslizable=tk.DoubleVar(value=1)
 
 #------------------FUNCIONES------------------------------------------------------------------------------------------------
 
@@ -67,7 +76,22 @@ def coordenadas_mouse(event):
 def one_click_A(event):
     print(f"{event.widget['text']} presionado")
 
-   
+#la variable de texto vinculada a la entrada actaliza el texto de la etiqueta
+def actualizar_etiqueta(*args):
+    etiqueta1.config(text=texto.get())
+
+#la variable del radio actaliza el texto de la etiqueta
+def actualizar_etiqueta_N(*args):
+    etiqueta1.config(text=variable_control.get())
+
+#le valor del deslizable modifica la opacidad de la ventana
+def actualizar_etiqueta_N(*args):
+    ventana.attributes("-alpha",valor_deslizable.get())
+
+#------------------CONFIG_DESLIZANTE----------------------------------------------------------------------------------------
+
+deslizante.config(variable=valor_deslizable,from_=0.20,to=1,resolution=0.01,orient=tk.HORIZONTAL)
+valor_deslizable.trace_add("write",actualizar_etiqueta_N)
 #------------------CONFIG_FRAME---------------------------------------------------------------------------------------------
 
 #Asignamos las propiedades a 'frame "n"'(ANCHO, ALTO, COLOR, BORDE)
@@ -81,13 +105,16 @@ boton1.config(fg="snow", bg="gray1", font=("Arial", 54, "italic"),state="disable
 
 #Si se preciona el boton con la tecla '<Button-1>' se ejecutara la funcion 'one_click'
 #boton1.bind("<Button-1>",lambda event: selecciono)
-boton1.bind("<Button-1>",one_click_A)
+boton1.bind("<Button-1>",on_key_press)
 
 #------------------CONFIG_RADIO---------------------------------------------------------------------------------------------
 
 #Asignamos las propiedades a 'radio "n"'(text=TEXTO,fg=COLOR_LETRA,bg=COLOR_FONDO,font=("FUENTE",TAMAÑO,"ESTILO"),value=VALOR_ASIGNADO,command=FUNCION_ASIGNADA_AL_RADIO)
 radio1.config(text="Manzanas",fg="gray1", bg="khaki", font=("Arial", 54, "italic"), variable=variable_control,value=1)
 radio2.config(text="Pera",fg="gray1", bg="khaki", font=("Arial", 54, "italic"), variable=variable_control,value=2)
+
+#modificar el contenido de la variable de control ejecta una funcion
+variable_control.trace_add("write",actualizar_etiqueta_N)
 
 #------------------CONFIG_CHECK---------------------------------------------------------------------------------------------
 
@@ -106,9 +133,9 @@ check2.config(text="Pera",fg="gray1", bg="khaki", font=("Arial", 54, "italic"),
 
 #------------------CONFIG_LABEL---------------------------------------------------------------------------------------------
 
-#Asignamos las propiedades a 'etiqueta "n"'(text=TEXTO,fg=COLOR_LETRA,bg=COLOR_FONDO,font=("FUENTE",TAMAÑO,"ESTILO"))
-etiqueta1.config(text="pollo1", fg="snow", bg="gray1", font=("Arial", 54, "italic"))
-etiqueta2.config(text="pollo2", fg="snow", bg="gray1", font=("Arial", 54, "italic"))
+#Asignamos las propiedades a 'etiqueta "n"'(text=TEXTO,fg=COLOR_LETRA,bg=COLOR_FONDO,font=("FUENTE",TAMAÑO,"ESTILO"),textvariable=VARIABLE_DE_TEXO)
+etiqueta1.config(text="pollo1", fg="snow", bg="gray1", font=("Arial", 54, "italic"),textvariable=texto)
+etiqueta2.config(text="pollo2", fg="snow", bg="gray1", font=("Arial", 54, "italic"),textvariable=texto)
 
 #------------------CONFIG_LABEL_FRAME---------------------------------------------------------------------------------------
 
@@ -122,6 +149,9 @@ entrada1.config(fg="snow", bg="gray1", font=("Arial", 54, "italic"))
 
 #Dejamos un texto por defecto en la entrada
 entrada1.insert(0, "Nombre")
+
+#modificar el contenido de la variable de control ejecta una funcion
+texto.trace_add("write",actualizar_etiqueta)
 
 #------------------CONFIG_VENTANA-------------------------------------------------------------------------------------------
 
@@ -193,6 +223,9 @@ ventana.bind("<Button-5>",coordenadas_mouse)
 
 #PACK 'labelframe1' aparecerá en 'ventana'
 #labelframe1.pack()
+
+#PACK 'deslizante' aparecerá en 'ventana'
+#deslizante.pack()
 
 #------------------ORDEN_SALIDA_GRIDE---------------------------------------------------------------------------------------------
 
