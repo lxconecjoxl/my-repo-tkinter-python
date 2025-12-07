@@ -85,13 +85,14 @@ def actualizar_etiqueta_N(*args):
     etiqueta1.config(text=variable_control.get())
 
 #le valor del deslizable modifica la opacidad de la ventana
-def actualizar_etiqueta_N(*args):
+def actualizar_etiqueta_V(*args):
     ventana.attributes("-alpha",valor_deslizable.get())
 
 #------------------CONFIG_DESLIZANTE----------------------------------------------------------------------------------------
 
 deslizante.config(variable=valor_deslizable,from_=0.20,to=1,resolution=0.01,orient=tk.HORIZONTAL)
-valor_deslizable.trace_add("write",actualizar_etiqueta_N)
+valor_deslizable.trace_add("write",actualizar_etiqueta_V)
+
 #------------------CONFIG_FRAME---------------------------------------------------------------------------------------------
 
 #Asignamos las propiedades a 'frame "n"'(ANCHO, ALTO, COLOR, BORDE)
@@ -133,9 +134,9 @@ check2.config(text="Pera",fg="gray1", bg="khaki", font=("Arial", 54, "italic"),
 
 #------------------CONFIG_LABEL---------------------------------------------------------------------------------------------
 
-#Asignamos las propiedades a 'etiqueta "n"'(text=TEXTO,fg=COLOR_LETRA,bg=COLOR_FONDO,font=("FUENTE",TAMAÑO,"ESTILO"),textvariable=VARIABLE_DE_TEXO)
-etiqueta1.config(text="pollo1", fg="snow", bg="gray1", font=("Arial", 54, "italic"),textvariable=texto)
-etiqueta2.config(text="pollo2", fg="snow", bg="gray1", font=("Arial", 54, "italic"),textvariable=texto)
+#Asignamos las propiedades a 'etiqueta "n"'(text=TEXTO,fg=COLOR_LETRA,bg=COLOR_FONDO,font=("FUENTE",TAMAÑO,"ESTILO"))
+etiqueta1.config(text="pollo1", fg="snow", bg="gray1", font=("Arial", 54, "italic"))
+etiqueta2.config(text="pollo2", fg="snow", bg="gray1", font=("Arial", 54, "italic"))
 
 #------------------CONFIG_LABEL_FRAME---------------------------------------------------------------------------------------
 
@@ -144,8 +145,8 @@ labelframe1.config(text="label", bg="orange3", padx=10, pady=10, width=10, heigh
 
 #------------------CONFIG_ENTRY---------------------------------------------------------------------------------------------
 
-#Asignamos las propiedades a 'entrada "n"'(fg=COLOR_LETRA,bg=COLOR_FONDO,font=("FUENTE",TAMAÑO,"ESTILO"))
-entrada1.config(fg="snow", bg="gray1", font=("Arial", 54, "italic"))
+#Asignamos las propiedades a 'entrada "n"'(fg=COLOR_LETRA,bg=COLOR_FONDO,font=("FUENTE",TAMAÑO,"ESTILO"),textvariable=VARIABLE_DE_TEXO)
+entrada1.config(fg="snow", bg="gray1", font=("Arial", 54, "italic"),textvariable=texto)
 
 #Dejamos un texto por defecto en la entrada
 entrada1.insert(0, "Nombre")
@@ -183,7 +184,7 @@ ventana.attributes("-alpha", 1.0)
 ventana.after(0)
 
 #Si se preciona el boton con la tecla '<KeyPress>'(CUALQUIER TECLA) se ejecutara la funcion 'on_key_press'
-ventana.bind("<KeyPress>",on_key_press)
+#ventana.bind("<KeyPress>",on_key_press)
 
 #Cuando dse mueve o modifica el tamaño de la ventana se llama a la funcion 'tamaño_ventana'
 #ventana.bind("<Configure>",tamaño_ventana)
@@ -204,10 +205,10 @@ ventana.bind("<Button-5>",coordenadas_mouse)
 #check2.pack()
 
 #PACK 'check1' aparecerá en 'ventana'
-#radio1.pack()
+radio1.pack()
 
 #PACK 'check2' aparecerá en 'ventana'
-#radio2.pack()
+radio2.pack()
 
 #PACK 'frame1' aparecerá en 'ventana'
 #frame1.pack()
@@ -216,7 +217,7 @@ ventana.bind("<Button-5>",coordenadas_mouse)
 #frame2.pack()
 
 #PACK 'etiqueta1' aparecerá en 'ventana'
-#etiqueta1.pack(side="right",padx=15)
+etiqueta1.pack(side="right",padx=15)
 
 #PACK 'boton1' aparecerá en 'ventana'
 #boton1.pack(side="right",padx=15)
@@ -225,7 +226,7 @@ ventana.bind("<Button-5>",coordenadas_mouse)
 #labelframe1.pack()
 
 #PACK 'deslizante' aparecerá en 'ventana'
-#deslizante.pack()
+deslizante.pack()
 
 #------------------ORDEN_SALIDA_GRIDE---------------------------------------------------------------------------------------------
 
